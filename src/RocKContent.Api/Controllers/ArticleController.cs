@@ -19,7 +19,7 @@ namespace RocKContent.Api.Controllers
         public ArticleController(IMediatorHandler mediator, IArticleRepository articleRepository)
         {
             _mediator = mediator;
-            _articleRepository = articleRepository; 
+            _articleRepository = articleRepository;
         }
 
         [Route("like")]
@@ -48,11 +48,11 @@ namespace RocKContent.Api.Controllers
             return Ok(result);
         }
 
-        [Route("all")]
+        [Route("all/{user}")]
         [HttpGet]
-        public async Task<ActionResult> QuestionGetAll()
+        public async Task<ActionResult> QuestionGetAll([FromRoute] string user)
         {
-            var result = await _articleRepository.GetAll();
+            var result = await _articleRepository.GetAll(user);
             return Ok(result);
         }
     }

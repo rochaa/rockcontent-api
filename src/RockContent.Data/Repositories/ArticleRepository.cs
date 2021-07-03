@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using RockContent.Domain.Dtos;
 using RockContent.Domain.Entities;
 using RockContent.Domain.Repositories;
 using RockContent.Shared.Data;
@@ -24,9 +26,21 @@ namespace RockContent.Data.Repositories
             return await _context.Articles.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Article>> GetAll()
+        public async Task<IEnumerable<ArticleToShowDto>> GetAll(string user)
         {
-            return await _context.Articles.AsNoTrackingWithIdentityResolution().ToListAsync();
+            return await _context.Articles
+                .AsNoTrackingWithIdentityResolution()
+                .Select(a => new ArticleToShowDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Text = a.Text,
+                    Author = a.Author,
+                    DatePublished = a.DatePublished,
+                    CountLikes = GetCountLikes(a.Id).Result,
+                    UserMarkLiked = HasLikeToUser(a.Id, user).Result
+                })
+                .ToListAsync();
         }
 
         public async Task<Like> GetLikeByUser(Guid articleId, string user)
@@ -34,6 +48,11 @@ namespace RockContent.Data.Repositories
             return await _context.Likes
                 .FirstOrDefaultAsync(l => l.ArticleId == articleId &&
                                           l.User == user);
+        }
+
+        public async Task<int> GetCountLikes(Guid articleId)
+        {
+            return await _context.Likes.CountAsync(l => l.ArticleId == articleId);
         }
 
         public async Task<bool> HasLikeToUser(Guid articleId, string user)
