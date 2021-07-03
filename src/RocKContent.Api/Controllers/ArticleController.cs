@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RockContent.Domain.Commands;
 using RockContent.Domain.Repositories;
@@ -8,6 +9,7 @@ namespace RocKContent.Api.Controllers
 {
     [ApiController]
     [Route("v1/article")]
+    [Authorize]
     public class ArticleController : ControllerBase
     {
         private readonly IMediatorHandler _mediator;
