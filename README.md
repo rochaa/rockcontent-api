@@ -18,7 +18,7 @@
 
 > docker build -f Dockerfile -t rockcontent:latest .
 
-> docker run --rm -d -p 3333:80 rockcontent
+> docker run --rm -d -p 5333:80 rockcontent
 
 ## Local tests (dotnet)
 

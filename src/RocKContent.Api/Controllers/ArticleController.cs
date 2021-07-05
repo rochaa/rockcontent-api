@@ -27,6 +27,7 @@ namespace RocKContent.Api.Controllers
         public async Task<ActionResult> ArticleLikePost(
             [FromBody] MarkLikedInArticleCommand command)
         {
+            // TODO: To increase resiliency, this command can be sent to a messaging service (rabbitMQ, Kafka, Azure Service Bus)
             var result = await _mediator.SendCommand(command);
 
             if (!result.Sucess)
@@ -40,6 +41,7 @@ namespace RocKContent.Api.Controllers
         public async Task<ActionResult> ArticleDislikePost(
             [FromBody] UncheckLikedInArticleCommand command)
         {
+            // TODO: To increase resiliency, this command can be sent to a messaging service (RabbitMQ, Kafka, Azure Service Bus)
             var result = await _mediator.SendCommand(command);
 
             if (!result.Sucess)
@@ -52,6 +54,7 @@ namespace RocKContent.Api.Controllers
         [HttpGet]
         public async Task<ActionResult> QuestionGetAll([FromRoute] string user)
         {
+            // TODO: Caching can be implemented here. If the application has millions of hits in a short period. (Cache Asp.net or Redis)
             var result = await _articleRepository.GetAll(user);
             return Ok(result);
         }

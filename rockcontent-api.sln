@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DDA43849-18AA-48B3-AAA8-16A79BF8067B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocKContent.Api", "src\RocKContent.Api\RocKContent.Api.csproj", "{F36501EC-531C-4168-B4E0-1E0BD00B752B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockContent.Api", "src\RockContent.Api\RockContent.Api.csproj", "{F36501EC-531C-4168-B4E0-1E0BD00B752B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockContent.Data", "src\RockContent.Data\RockContent.Data.csproj", "{C33132FD-F034-43F5-8C60-04914C4AED0C}"
 EndProject
